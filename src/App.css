@@ -45,9 +45,11 @@ h1 {
 }
 
 .container {
-  width: 455px;
+  z-index: 11;
+  width: 620px;
   padding: 0rem 5rem;
   margin-top: 4rem;
+  position: relative;
 }
 
 .container label {
@@ -63,7 +65,7 @@ h1 {
   font-weight: 300;
   font-size: 2.5rem;
   line-height: 44px;
-  width: 97%;
+  width: 100%;
   display: block;
   padding: 1.5rem 1.5rem;
   color: #fff;
@@ -80,7 +82,7 @@ h1 {
   font-weight: 500;
   font-family: Inter, sans-serif;
   display: block;
-  width: 108%;
+  width: 100%;
   margin-bottom: 1rem;
 }
 
@@ -109,8 +111,8 @@ h1 {
 .App {
   max-width: 1100px;
   display: flex;
-  justify-content: flex-start;
-  margin: 6rem auto 2rem auto;
+  justify-content: space-between;
+  margin: 6rem auto 2rem;
 }
 
 .container-title h1 {
@@ -150,13 +152,13 @@ h1 {
 }
 
 .effectglass {
-  background: rgba(255, 255, 255, 0.61);
-  border-radius: 0px 25px 25px 0px;
+  background: rgba(255,255,255,.61);
+  border-radius: 0 25px 25px 0;
   position: absolute;
   left: 0px;
   top: 0px;
   width: 47vw;
-  height: 44vw;
+  height: 86%;
   z-index: 1;
 }
 
