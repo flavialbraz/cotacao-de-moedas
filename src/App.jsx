@@ -6,17 +6,23 @@ import './App.css'
 
 function App() {
   const [valor, setValor] = useState([])
-//  const url = `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao=%27${hojeDia}%27&$top=100&$skip=0&$format=json&$select=cotacaoCompra,cotacaoVenda,dataHoraCotacao` 
-
+  const [valorRetornado, setvalorRetornado] = useState([])
+  const [codMoeda, setCodMoeda] = useState('')   
   const [inputUserValor, setInputUserValor] = useState(0)
-  
+
+    const dataAtual = new Date();
+    const dia = dataAtual.getDate() 
+    const mes = (dataAtual.getMonth() + 1) 
+    const ano = dataAtual.getFullYear();
+    const dataHoje = `-${mes}-${dia}-${ano}`;
+
 
     const moedasCotacao = [
 
       {
         simbolo: "AUD",
         nomeFormatado: "Dólar australiano",
-        valor: 4.2345345340,
+        valor: 3.4566,
         },
         {
         simbolo: "CAD",
@@ -24,19 +30,19 @@ function App() {
         valor: 3.20,
         },
         {
-        simbolo: "CHF",
-        nomeFormatado: "Franco suíço",
-        valor: 2.20,
+        simbolo: "USD",
+        nomeFormatado: "Dólar americano",
+        valor: 5.1854,
         },
         {
         simbolo: "DKK",
         nomeFormatado: "Coroa dinamarquesa",
-        valor: 1.20,
+        valor: 3.81,
         },
         {
         simbolo: "EUR",
         nomeFormatado: "Euro",
-        valor: 1.20,
+        valor: 5.5162,
         }
   ]
    
@@ -44,19 +50,44 @@ function App() {
       for (const moeda of moedasCotacao) {
           if (moeda.simbolo === selectedOption) {
               setValor(moeda.valor);
+              setCodMoeda(selectedOption) 
               break;
           }
       }
     }
 
+ 
+
 const valorFormatado = Number(valor).toFixed(2); 
 const total = valorFormatado * inputUserValor;
 
 const totalExibido = total.toLocaleString('pt-BR', { minimumFractionDigits: 2 });   
+  
+// useEffect(() => {
+//     fetch(`https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaAberturaOuIntermediario(codigoMoeda=@codigoMoeda,dataCotacao=@dataCotacao)?@codigoMoeda=%27${codMoeda}%27&@dataCotacao=%27${dataHoje}%27&$format=json&$select=cotacaoCompra`)
+//       .then(response => response.json())
+//       .then(data => {
+//         setvalorRetornado(data.results)
+     
+//       })
+//   }, []) 
 
- 
+// let url = `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaAberturaOuIntermediario(codigoMoeda=@codigoMoeda,dataCotacao=@dataCotacao)?@codigoMoeda=%27${codMoeda}%27&@dataCotacao=%27${dataHoje}%27&$format=json&$select=cotacaoCompra`
+
+
+
   return (
     <div className="App">
+
+<div className="container-title">   
+<div className="effectglass"> </div>
+      <div className="container-title effect"> 
+      <div className="money"> </div>
+        <h1> Cotação </h1>
+        <p> Acompanhe a <strong> cotação das moedas mais importantes do mundo </strong> em tempo real e organize as suas finanças para a próxima viagem. </p>
+      </div>
+  </div>
+         <div className="container"> 
       <label 
       htmlFor="inputValorUsuario"> 
        Digite o valor que você gostaria de converter 
@@ -87,8 +118,9 @@ const totalExibido = total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })
                 )
           })}
         </select>
-          <h1> {totalExibido} </h1>
+        <div className="resultado">  R${totalExibido}  </div>
    
+     </div>
      </div>
   )
 }

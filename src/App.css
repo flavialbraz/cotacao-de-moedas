@@ -1,13 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100;0,200;0,300;0,500;0,800;0,900;1,700&display=swap');
+body {
+  background: #FAFAFA;
+  font-size: 13px;
+  color: #686868;
+
+  font-family: 'Hanken Grotesk', sans-serif;
+  line-height: 19px;
+}
+
+* {
+  margin: 0;
+  padding:0;
+  
+  box-sizing: border-box;
+}
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  --green: #83BF4F;
+  --yellow: #FFCA28;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -17,54 +26,176 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--green);
   text-decoration: inherit;
 }
-a:hover {
-  color: #535bf2;
-}
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+a:hover {
+  color: var(--yellow);
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 2.5em;
   line-height: 1.1;
 }
+.money {
+  width: 100%;
+  height: 223px;
+  background: url(../public/images/money.svg) top center no-repeat;
+}
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+.container {
+  width: 455px;
+  padding: 0rem 5rem;
+  margin-top: 4rem;
+}
+
+.container label {
+  width: 100%;
+  display: block;
+  margin-bottom: 0.5rem;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.container .resultado {
+  background: #83BF4F;
+  box-shadow: 1px 7px 11px -4px rgb(0 0 0 / 5%);
+  border-radius: 10px;
+  font-weight: 300;
+  font-size: 2.5rem;
+  line-height: 44px;
+  width: 97%;
+  display: block;
+  padding: 1.5rem 1.5rem;
+  color: #fff;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.container select {
+  outline-color: var(--green);
+  border: unset;
+  background: #FFFFFF;
+  box-shadow: 1px 7px 11px -4px rgb(0 0 0 / 5%);
+  border-radius: 10px;
+  padding: 1rem 1rem;
+  color: rgba(0, 0, 0, 0.29);
+  font-weight: 500;
+  font-family: Inter, sans-serif;
+  display: block;
+  width: 108%;
+  margin-bottom: 1rem;
+}
+
+.container input {
+  border: unset;
+  background: #FFFFFF;
+  box-shadow: 1px 7px 11px -4px rgb(0 0 0 / 5%);
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 44px;
+  color: rgba(0, 0, 0, 0.29);
+  outline-color: var(--green);
+  padding: 1rem 1rem;
+  margin-bottom: 1rem;
+  display: block;
+  width: 100%;
+}
+
+.container-title {
+  flex: 1;
+  padding: 2rem;
+  max-width: 421px;
+}
+
+.App {
+  max-width: 1100px;
+  display: flex;
+  justify-content: flex-start;
+  margin: 6rem auto 2rem auto;
+}
+
+.container-title h1 {
+  font-style: normal;
+  font-weight: 800;
+  font-size: 4rem;
+  line-height: 77px;
+  color: var(--green);
+  margin: 0;
+}
+
+.container-title p > strong {
+  color: var(--green);
+  font-weight: 600;
+}
+ 
+.App:before, .App:after {
+  position: absolute;
+  width: 441px;
+  height: 319px;
+  left: -65px;
+  top: 27px;
+  background: var(--yellow);
+  filter: blur(74.5px);
+  content: "";
+}
+
+.App:after {
+  background: var(--green);
+  left: 202px;
+  top: 221px;
+}
+
+.container-title.effect {
+  position: relative;
+  z-index: 111;
+}
+
+.effectglass {
+  background: rgba(255, 255, 255, 0.61);
+  border-radius: 0px 25px 25px 0px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 47vw;
+  height: 44vw;
+  z-index: 1;
+}
+
+
+@media (max-width: 600px) {
+
+.effectglass {
+  width: 100%;
+  height: 100%;
+}
+
+.App {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.container-title, .container-title {
+  flex: unset;
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem;
+}
+
+.container {
+  width: 100%;
+  margin: auto;
+  padding: 1rem;
+  position: relative;
+  z-index: 1111;
+}
+.container select {
+  width: 100%;
+}
+#root {
+  width: 100%;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
 }
