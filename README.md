@@ -23,7 +23,12 @@ Realizei o o UI/UX Design utilizando o figma e as seguintes tecnologias:
 - CSS
 - Git & Github
 
-###Fe
+
+#### Features
+- Tratamento de erro
+- Testes unitários
+- Formatar os valores
+- Otimizar o desempenho 
 
 
 # 🛠️ Abrir e rodar o projeto
