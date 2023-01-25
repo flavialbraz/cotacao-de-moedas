@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import "./styles/App.css";
 import { Header } from "./components/Header";
-import { Resultado } from "./components/Resultado";
 import { SiglasMoedas } from "./components/SiglasMoedas";
-
 
 function App() {
   

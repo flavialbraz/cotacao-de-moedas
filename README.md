@@ -3,9 +3,13 @@
 :moneybag: Cotação de moedas 
 </h1> 
 
+<p align="center">
+    <img src="http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge"/>
+</p>
+
 ![127 0 0 1_5173_ (1)](https://user-images.githubusercontent.com/78583429/214709568-06042d7b-f3ab-46a1-8022-57cec33a33ab.png)
 
-> https://cotacao-de-moedas-gray.vercel.app/
+> Online: https://cotacao-de-moedas-gray.vercel.app/
 
 # 📁 O projeto
 A ideia da aplicação é ser um conversor de moeda. É voltada para quem quer viajar e precisa se organizar/ver quanto em reais precisará separar para comprar a moeda escolhida. 
