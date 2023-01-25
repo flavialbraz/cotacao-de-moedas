@@ -6,19 +6,14 @@ import { useState, useEffect } from "react"
 export function SiglasMoedas ({handleMoedaSelecionada}) {
 
    
-
-  const moedaBRL = {
-    simbolo: "BRL",
-    nomeFormatado: "Real Brasileiro"
-  }
-
     const [moedaSiglas, setMoedaSigla] = useState([]);
     const URIMOEDASAPI =  `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/Moedas?%24format=json&%24orderby=simbolo`
     useEffect(() => {
         fetch(URIMOEDASAPI)
           .then((response) => response.json())
           .then((moedaSiglas) => {
-            setMoedaSigla(moedaSiglas.value.concat(moedaBRL));          });
+            setMoedaSigla(moedaSiglas.value);
+          });
       }, []);
        
       
