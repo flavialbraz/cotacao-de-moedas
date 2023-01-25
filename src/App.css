@@ -1,22 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100;0,200;0,300;0,500;0,800;0,900;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100;0,200;0,300;0,500;0,800;0,900;1,700&display=swap");
 body {
-  background: #FAFAFA;
+  background: #fafafa;
   font-size: 13px;
   color: #686868;
 
-  font-family: 'Hanken Grotesk', sans-serif;
+  font-family: "Hanken Grotesk", sans-serif;
   line-height: 19px;
 }
 
 * {
   margin: 0;
-  padding:0;
-  
+  padding: 0;
+
   box-sizing: border-box;
 }
 :root {
-  --green: #83BF4F;
-  --yellow: #FFCA28;
+  --green: #83bf4f;
+  --yellow: #ffca28;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -41,12 +41,12 @@ h1 {
 .money {
   width: 100%;
   height: 223px;
-  background: url(../public/images/money.svg) top center no-repeat;
+  background: url(./assets/images/money.svg) top center no-repeat;
 }
 
 .container {
   z-index: 11;
-  width: 620px;
+  width: 55%;
   padding: 0rem 5rem;
   margin-top: 4rem;
   position: relative;
@@ -59,7 +59,7 @@ h1 {
   font-weight: 500;
 }
 .container .resultado {
-  background: #83BF4F;
+  background: #83bf4f;
   box-shadow: 1px 7px 11px -4px rgb(0 0 0 / 5%);
   border-radius: 10px;
   font-weight: 300;
@@ -69,12 +69,13 @@ h1 {
   display: block;
   padding: 1.5rem 1.5rem;
   color: #fff;
+  word-break: break-all;
 }
 
 .container select {
   outline-color: var(--green);
   border: unset;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 1px 7px 11px -4px rgb(0 0 0 / 5%);
   border-radius: 10px;
   padding: 1rem 1rem;
@@ -86,20 +87,38 @@ h1 {
   margin-bottom: 1rem;
 }
 
+.container input::placeholder {
+  color: rgb(0 0 0 / 20%);
+}
+
 .container input {
   border: unset;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 1px 7px 11px -4px rgb(0 0 0 / 5%);
   border-radius: 10px;
   font-weight: 400;
-  font-size: 2rem;
+  font-size: 2.6rem;
   line-height: 44px;
   color: rgba(0, 0, 0, 0.29);
   outline-color: var(--green);
-  padding: 1rem 1rem;
+  padding: 2rem 1.6rem 2rem 5.3rem;
   margin-bottom: 1rem;
   display: block;
   width: 100%;
+}
+
+.input-value span {
+  font-weight: 400;
+  font-size: 2.7rem;
+  line-height: 44px;
+  color: rgba(0, 0, 0, 0.29);
+  position: absolute;
+  bottom: 2rem;
+  left: 1.6rem;
+}
+
+.input-value {
+  position: relative;
 }
 
 .container-title {
@@ -128,22 +147,17 @@ h1 {
   color: var(--green);
   font-weight: 600;
 }
- 
-.App:before, .App:after {
+
+.App:before,
+.App:after {
   position: absolute;
-  width: 441px;
-  height: 319px;
-  left: -65px;
+  border-radius: 100%;
+  height: 440px;
+  width: 440px;
   top: 27px;
   background: var(--yellow);
   filter: blur(74.5px);
   content: "";
-}
-
-.App:after {
-  background: var(--green);
-  left: 202px;
-  top: 221px;
 }
 
 .container-title.effect {
@@ -152,52 +166,95 @@ h1 {
 }
 
 .effectglass {
-  background: rgba(255,255,255,.61);
+  background: rgb(255 255 255 / 25%);
   border-radius: 0 25px 25px 0;
   position: absolute;
   left: 0px;
   top: 0px;
-  width: 47vw;
-  height: 86%;
+  width: 47%;
+  height: 100%;
   z-index: 1;
 }
 
-
-@media (max-width: 600px) {
-
-.effectglass {
-  width: 100%;
-  height: 100%;
+.App:before {
+  animation: effects 6s infinite 6s ease-in-out forwards;
+  animation-delay: -4s;
 }
 
-.App {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 1rem;
+@keyframes effects {
+  from {
+    left: -10rem;
+    top: 10rem;
+  }
+  50% {
+    top: 6rem;
+    left: 20rem;
+  }
+  to {
+    left: -10rem;
+    top: 10rem;
+  }
 }
 
-.container-title, .container-title {
-  flex: unset;
-  width: 100%;
-  max-width: 100%;
-  padding: 1rem;
+.App:after {
+  animation: effectsg 10s infinite 10s ease-in-out forwards;
+  border-radius: 100%;
+  height: 300px;
+  width: 400px;
+  background: var(--green);
+  animation-timing-function: ease-in-out;
 }
 
-.container {
-  width: 100%;
-  margin: auto;
-  padding: 1rem;
-  position: relative;
-  z-index: 1111;
+@keyframes effectsg {
+  from {
+    left: 0;
+    top: 0rem;
+  }
+  50% {
+    top: 20rem;
+    left: 40rem;
+  }
+  to {
+    left: 0;
+    top: 0rem;
+  }
 }
-.container select {
-  width: 100%;
-}
-#root {
-  width: 100%;
-  display: block;
-  position: relative;
-  overflow: hidden;
-}
+
+@media only screen and (max-width: 785px) {
+  .effectglass {
+    width: 100%;
+    height: 100%;
+  }
+
+  .App {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+
+  .container-title,
+  .container-title {
+    flex: unset;
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .container {
+    width: 100%;
+    margin: auto;
+    padding: 1rem;
+    position: relative;
+    z-index: 1111;
+  }
+  .container select {
+    width: 100%;
+  }
+  #root {
+    width: 100%;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
 }

@@ -1,127 +1,95 @@
-import { useEffect, useState } from 'react'
-
- 
-import './App.css'
- 
+import { useEffect, useState } from "react";
+import dayjs from "dayjs";
+import "./App.css";
 
 function App() {
-  const [valor, setValor] = useState([])
-  const [valorRetornado, setvalorRetornado] = useState([])
-  const [codMoeda, setCodMoeda] = useState('')   
-  const [inputUserValor, setInputUserValor] = useState(0)
+  const [moedaSelecionada, setMoedaSelecionada] = useState("AUD");
+  const [moedaSiglas, setMoedaSigla] = useState([]);
+  const [inputValor, setInputValor] = useState(0);
 
-    const dataAtual = new Date();
-    const dia = dataAtual.getDate() 
-    const mes = (dataAtual.getMonth() + 1) 
-    const ano = dataAtual.getFullYear();
-    const dataHoje = `-${mes}-${dia}-${ano}`;
+  const [cotacaoValor, setCotacaoValor] = useState(0);
 
+  const dataOntem = dayjs().subtract(1, "day").format("MM-DD-YYYY");
+  const dataHoje = dayjs().format("MM-DD-YYYY");
 
-    const moedasCotacao = [
+  useEffect(() => {
+    fetch(
+      `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/Moedas?%24format=json&%24orderby=simbolo`
+    )
+      .then((response) => response.json())
+      .then((moedaSiglas) => {
+        setMoedaSigla(moedaSiglas.value);
+      });
 
-      {
-        simbolo: "AUD",
-        nomeFormatado: "Dólar australiano",
-        valor: 3.4566,
-        },
-        {
-        simbolo: "CAD",
-        nomeFormatado: "Dólar canadense",
-        valor: 3.20,
-        },
-        {
-        simbolo: "USD",
-        nomeFormatado: "Dólar americano",
-        valor: 5.1854,
-        },
-        {
-        simbolo: "DKK",
-        nomeFormatado: "Coroa dinamarquesa",
-        valor: 3.81,
-        },
-        {
-        simbolo: "EUR",
-        nomeFormatado: "Euro",
-        valor: 5.5162,
-        }
-  ]
-   
-    function handleChange(selectedOption) {
-      for (const moeda of moedasCotacao) {
-          if (moeda.simbolo === selectedOption) {
-              setValor(moeda.valor);
-              setCodMoeda(selectedOption) 
-              break;
-          }
-      }
-    }
+    fetch(
+      `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaPeriodo(moeda=@moeda,dataInicial=@dataInicial,dataFinalCotacao=@dataFinalCotacao)?@moeda=%27${moedaSelecionada}%27&@dataInicial=%27${dataOntem}%27&@dataFinalCotacao=%27${dataHoje}%27&$top=10&$format=json&$select=cotacaoVenda`
+    )
+      .then((response) => response.json())
 
- 
+      .then((cotacaoValor) => {
+        setCotacaoValor(cotacaoValor.value[0].cotacaoVenda);
+      });
+  }, [moedaSelecionada]);
 
-const valorFormatado = Number(valor).toFixed(2); 
-const total = valorFormatado * inputUserValor;
-
-const totalExibido = total.toLocaleString('pt-BR', { minimumFractionDigits: 2 });   
-  
-// useEffect(() => {
-//     fetch(`https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaAberturaOuIntermediario(codigoMoeda=@codigoMoeda,dataCotacao=@dataCotacao)?@codigoMoeda=%27${codMoeda}%27&@dataCotacao=%27${dataHoje}%27&$format=json&$select=cotacaoCompra`)
-//       .then(response => response.json())
-//       .then(data => {
-//         setvalorRetornado(data.results)
-     
-//       })
-//   }, []) 
-
-// let url = `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoMoedaAberturaOuIntermediario(codigoMoeda=@codigoMoeda,dataCotacao=@dataCotacao)?@codigoMoeda=%27${codMoeda}%27&@dataCotacao=%27${dataHoje}%27&$format=json&$select=cotacaoCompra`
-
-
+  const totalConvertido = (cotacaoValor * inputValor).toFixed(2);
+  const totaldeCompra = (inputValor / cotacaoValor).toFixed(2);
 
   return (
     <div className="App">
-
-<div className="container-title">   
-<div className="effectglass"> </div>
-      <div className="container-title effect"> 
-      <div className="money"> </div>
-        <h1> Cotação </h1>
-        <p> Acompanhe a <strong> cotação das moedas mais importantes do mundo </strong> em tempo real e organize as suas finanças para a próxima viagem. </p>
+      <div className="container-title">
+        <div className="effectglass"> </div>
+        <div className="container-title effect">
+          <div className="money"> </div>
+          <h1> Cotação </h1>
+          <p>
+            {" "}
+            Acompanhe a{" "}
+            <strong> cotação das moedas mais importantes do mundo </strong> em
+            tempo real e organize as suas finanças para a próxima viagem.{" "}
+          </p>
+        </div>
       </div>
-  </div>
-         <div className="container"> 
-      <label 
-      htmlFor="inputValorUsuario"> 
-       Digite o valor que você gostaria de converter 
-      </label>
 
-      <input 
-        type="number" 
-        id="inputValorUsuario" 
-        onChange={e => setInputUserValor(e.target.value)}
-      /> 
-     
-      <select 
-      name="selectMoeda" 
-      onChange={ e => handleChange(e.target.value)}
-      >
+      <div className="container">
+        <label htmlFor="inputValorUsuario">Com R${inputValor} reais</label>
 
-      <option 
-      value="Selecione" 
-      selected 
-      disabled
-      >
-        Selecione 
-      </option>
+        <div className="input-value">
+          <span> R$ </span>
 
-          {moedasCotacao.map(moedaAtual => {
-                return (
-                      <option key={moedaAtual.simbolo} value={moedaAtual.simbolo}> {moedaAtual.simbolo} </option>
-                )
-          })}
-        </select>
-        <div className="resultado">  R${totalExibido}  </div>
-   
-     </div>
-     </div>
-  )
+          <input
+            type="number"
+            id="inputValor"
+            onChange={(e) => setInputValor(e.target.value)}
+          />
+        </div>
+
+        <label htmlFor="inputValorUsuario">Você conseguirá comprar:</label>
+        {moedaSiglas.length > 0 ? (
+          <select
+            name="selectMoeda"
+            onChange={(e) => setMoedaSelecionada(e.target.value)}
+          >
+            {moedaSiglas.map((moeda) => {
+              return (
+                <option key={moeda.simbolo} value={moeda.simbolo}>
+                  {" "}
+                  {moeda.simbolo} - {moeda.nomeFormatado}{" "}
+                </option>
+              );
+            })}
+          </select>
+        ) : (
+          <select name="selectMoeda">
+            <option value="Selecione"> </option>
+          </select>
+        )}
+
+        <div className="resultado">
+          {" "}
+          {totaldeCompra} {moedaSelecionada}{" "}
+        </div>
+      </div>
+    </div>
+  );
 }
-export default App
+export default App;
