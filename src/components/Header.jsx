@@ -7,8 +7,8 @@ export function Header () {
         <div className="container-title effect">
           <div className="money"> </div>
           <h1> Cotação </h1>
-          <p>Organize as suas finanças para a próxima viagem! 
-            Saiba quanto você precisará em REAL para comprar a moeda escolhida. 
+          <p>
+            Converta valores em REAL para a moeda estrangeira escolhida. Organize as suas finanças e viaje com tranquilidade. 
             {/* Acompanhe a <strong> cotação das moedas mais importantes do mundo </strong> em
             tempo real e organize as suas finanças para a próxima viagem.  */}
           </p>
